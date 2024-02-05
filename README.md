@@ -84,8 +84,8 @@ Converting common wps coding to r and python code
     /*                                                                                                                        */
     /*  WPS LOOP                                 R LOOP                                              WPS SQL PYTHON & R       */
     /*  ========                                 ======                                              ==================       */
-    /*  data want;                               classz$BMI<-0;                                      select                   */
-    /*    array hgtwgt height weight;            classz$HGTSQR<-0;                                     HEIGHT^2 as HGTSQR     */
+    /*  data want;                                                                                   select                   */
+    /*    array hgtwgt height weight;                                                                  HEIGHT^2 as HGTSQR     */
     /*    do row=1 to nobs;                      for(i in 1:nrow(classz))                             ,703*WEIGHT             */
     /*      set sd1.classz nobs=nobs point=row;     {                                                    /HEIGHT^2 as BMI     */
     /*      hgtsqr = hgtwgt[1]*hgtwgt[1];            classz[i,"BMI"] <- 703*classz[i,"WEIGHT"]                                */
