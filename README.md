@@ -88,8 +88,8 @@ Converting common wps coding to r and python code
     /*    array hgtwgt height weight;            classz$HGTSQR<-0;                                     HEIGHT^2 as HGTSQR     */
     /*    do row=1 to nobs;                      for(i in 1:nrow(classz))                             ,703*WEIGHT             */
     /*      set sd1.classz nobs=nobs point=row;     {                                                    /HEIGHT^2 as BMI     */
-    /*      hgtsqr = hgtwgt[1]*hgtwgt[1];            classz[i,6] <- 703*classz[i,5]/classz[i,4]^2;                            */
-    /*      bmi    = 703*hgtwgt[2]/hgtsqr;           classz[i,7] <- classz[i,4]^2;                                            */
+    /*      hgtsqr = hgtwgt[1]*hgtwgt[1];            classz[i,"BMI"] <- 703*classz[i,"WEIGHT"]                                */
+    /*      bmi    = 703*hgtwgt[2]/hgtsqr;            / classz[i,"HEIGHT"]^2;                                                 */
     /*      output;                                 };                                                                        */
     /*    end;                                                                                                                */
     /*    stop;                                                                                                               */
