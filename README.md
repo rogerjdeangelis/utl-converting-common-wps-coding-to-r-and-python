@@ -17,6 +17,7 @@ Converting common wps coding to r and python code
 
     TASKS ( SOLUTIONS FOR WPS, R AND PYTHON)
 
+      0. regex loops and sql
       1. add columns
       2. loops
       3. functions
@@ -33,6 +34,172 @@ Converting common wps coding to r and python code
            Python issue: could not coerce the pivoted output into a usable panda dataframe,my issue?)
      14. pivot_wide_to_long no sql (no python solution)
            Python issue: could not coerce the pivoted output into a usable panda dataframe,my issue?)
+    %let pgm=utl-intergrating-traditional-languages-with-rusing-regex-loops-sql;
+
+    Intergrating-traditional-languages-with-r-using-regex-loops-sql
+
+    github
+    http://tinyurl.com/526bbdwf
+    https://github.com/rogerjdeangelis/utl-converting-common-wps-coding-to-r-and-python
+
+    github
+    https://tinyurl.com/59bx7me8
+    https://github.com/rogerjdeangelis/utl-leveraging-your-knowledge-of-regular-expressions-to-wps-r-python-multi-language
+
+    /*___                               _                                   _
+     / _ \   _ __ ___  __ _  _____  __ | | ___   ___  _ __  ___   ___  __ _| |
+    | | | | | `__/ _ \/ _` |/ _ \ \/ / | |/ _ \ / _ \| `_ \/ __| / __|/ _` | |
+    | |_| | | | |  __/ (_| |  __/>  <  | | (_) | (_) | |_) \__ \ \__ \ (_| | |
+     \___/  |_|  \___|\__, |\___/_/\_\ |_|\___/ \___/| .__/|___/ |___/\__, |_|
+                      |___/                          |_|                 |_|
+    */
+
+    /*                   _
+    (_)_ __  _ __  _   _| |_
+    | | `_ \| `_ \| | | | __|
+    | | | | | |_) | |_| | |_
+    |_|_| |_| .__/ \__,_|\__|
+            |_|
+    */
+
+    %utl_rbeginx;
+    parmcards4;
+    hgtwgt<-read.table(header = TRUE, text = "
+    NAME HGT WGT
+    Roger 69  99
+    James 60  84
+    Janet 65  98
+    ")
+    hgtwgt
+    saveRDS(hgtwgt,file="d:/rds/hgtwgt.rds")
+    ;;;;
+    %utl_rendx;
+
+
+    /**************************************************************************************************************************/
+    /*                                                                                                                        */
+    /* d:/rds/hgtwgt.rds                                                                                                      */
+    /*                                                                                                                        */
+    /*    NAME HGT WGT                                                                                                        */
+    /* 1 Roger  69  99                                                                                                        */
+    /* 2 James  60  84                                                                                                        */
+    /* 3 Janet  65  98                                                                                                        */
+    /*                                                                                                                        */
+    /**************************************************************************************************************************/
+
+    /**************************************************************************************************************************/
+    /*                                                                                                                        */
+    /*                                                                                                                        */
+    /*   _ __ ___  __ _  _____  __                                                                                            */
+    /*  | `__/ _ \/ _` |/ _ \ \/ /                                                                                            */
+    /*  | | |  __/ (_| |  __/>  <                                                                                             */
+    /*  |_|  \___|\__, |\___/_/\_\                                                                                            */
+    /*            |___/                                                                                                       */
+    /*                                                                                                                        */
+    /*  COMMON GENERIC SYNTAX                R SYNTAX                                                                         */
+    /*                                                                                                                        */
+    /*  $string ="James";                    %utl_submit_r64x("                                                               */
+    /*  if ($str =~ /^J/)                    hgtwgt<-readRDS(file='d:/rds/hgtwgt.rds');                                       */
+    /*     {                                 hgtwgt;                                                                          */
+    /*      print "$string";                 library(dplyr);                                                                  */
+    /*     }                                 want <- hgtwgt |>                                                                */
+    /*                                         filter(grepl('^J', NAME));                                                     */
+    /*                                       want;                                                                            */
+    /*                                       saveRDS(hgtwgt,file='d:/rds/regex.rds')                                          */
+    /*                                       ");                                                                              */
+    /*                                                                                                                        *r
+    /*                                          NAME HGT WGT                                                                  *r
+    /*                                       1 James  60  84                                                                  *r
+    /*                                       2 Janet  65  98                                                                  *r
+    /*                                                                                                                        *r
+    /*       _       _         __                            _                                                                */
+    /*    __| | __ _| |_ __ _ / _|_ __ __ _ _ __ ___   ___  | | ___   ___  _ __  ___                                          */
+    /*   / _` |/ _` | __/ _` | |_| `__/ _` | `_ ` _ \ / _ \ | |/ _ \ / _ \| `_ \/ __|                                         */
+    /*  | (_| | (_| | || (_| |  _| | | (_| | | | | | |  __/ | | (_) | (_) | |_) \__ \                                         */
+    /*   \__,_|\__,_|\__\__,_|_| |_|  \__,_|_| |_| |_|\___| |_|\___/ \___/| .__/|___/                                         */
+    /*                                                                    |_|                                                 */
+    /*                                                                                                                        */
+    /*  COMMON GENERIC SYNTAX   ADDING TO EXISTING DATAFRAME                    FILLING EMPTY DATAFRAME                       */
+    /*                                                                                                                        */
+    /*  DECLARE y(5);           %utl_submit_r64x('                             %utl_submit_r64x('                             */
+    /*  DO x = 1 TO 5 BY 1      hgtwgt<-readRDS(file="d:/rds/hgtwgt.rds");     xy <- data.frame(X = double(), Y= double());   */
+    /*    y[i]=**2;             for (i in seq(1,nrow(hgtwgt),1)) {             for (i in seq(1,2,1)) {                        */
+    /*  End;                        hgtwgt[i,"BMI"]=703 *                        xy[i,"X"] = i;                               */
+    /*                                   hgtwgt[i,"WGT"] /  hgtwgt[i,"HGT"]^2;   xy[i,"Y"] = i^2;                             */
+    /*                          };                                               };                                           */
+    /*                          hgtwgt;                                            xy;                                        */
+    /*                          ');                                                ');                                        */
+    /*                                                                                                                        */
+    /*                                                                             X Y                                        */
+    /*                                                                           1 1 1                                        */
+    /*                                                                           2 2 4                                        */
+    /*                                                                                                                        */
+    /*                            HGT WGT      BMI                                                                            */
+    /*                                                                          %utl_submit_r64x('                            */
+    /*                          1  69  99 14.61815                              xy <- data.frame(X = double(), Y= double());  */
+    /*                          2  56  84 18.83036                              for (i in seq(1,2,1)) {                       */
+    /*                          3  65  98 16.30627                                xy[i,1] = i;                                */
+    /*                                                                            xy[i,2] = i^2;                              */
+    /*                                                                            };                                          */
+    /*                          NON LOOP SOLUTIONS                                  xy;                                       */
+    /*                                                                                                                        */
+    /*                          %utl_submit_r64x('                                X Y                                         */
+    /*                          library(dplyr);                                 1 1 1                                         */
+    /*                          hgtwgt<-readRDS(file="d:/rds/hgtwgt.rds");      2 2 4                                         */
+    /*                          hgtwgt;                                                                                       */
+    /*                          hgtwgt<-mutate(hgtwgt,                          %utl_submit_r64x('                            */
+    /*                            BMI = 703 * WGT / HGT^2);                     xy <- data.frame(X = double(), Y= double());  */
+    /*                          hgtwgt;                                         for (i in seq(1,2,1)) {                       */
+    /*                          ');                                               ros=cbind(X=i,Y=i^2);                       */
+    /*                                                                            xy=rbind(xy,ros);                           */
+    /*                            HGT WGT      BMI                                };                                          */
+    /*                          1  69  99 14.61815                              xy;                                           */
+    /*                          2  56  84 18.83036                              ');                                           */
+    /*                          3  65  98 16.30627                                                                            */
+    /*                                                                                                                        */
+    /*                   _        _        _                                                                                  */
+    /*   _ __ ___   __ _| |_ _ __(_)_  __ | | ___   ___  _ __  ___                                                            */
+    /*  | `_ ` _ \ / _` | __| `__| \ \/ / | |/ _ \ / _ \| `_ \/ __|                                                           */
+    /*  | | | | | | (_| | |_| |  | |>  <  | | (_) | (_) | |_) \__ \                                                           */
+    /*  |_| |_| |_|\__,_|\__|_|  |_/_/\_\ |_|\___/ \___/| .__/|___/                                                           */
+    /*                                                  |_|                                                                   */
+    /*                   _        _        _                                                                                  */
+    /*  COMMON GENERIC SYNTAX   ADDING TO EXISTING DATAFRAME                                                                  */
+    /*                                                                                                                        */
+    /*                                                                                                                        */
+    /*  mtx=j(2,2,0);             %utl_submit_r64x('                                                                          */
+    /*  do ix=1 TO 2;             mtx<-matrix(nrow=2,ncol=2);                                                                 */
+    /*   do iy=1 to 2;            for (i in seq(1,2,1))  {                                                                    */
+    /*    mtx[ix,iy]=ix + iy;      for (j in seq(1,2,1))  {                                                                   */
+    /*   end;                           mtx[i,j]=i+j ;                                                                        */
+    /*  end;                            }                                                                                     */
+    /*                              };                                                                                        */
+    /*                            colnames(mtx)<-c("x","y");                                                                  */
+    /*                            mtx;                                                                                        */
+    /*                            ');                                                                                         */
+    /*                                 x y                                                                                    */
+    /*                                                                                                                        */
+    /*                            [1,] 2 3                                                                                    */
+    /*                            [2,] 3 4                                                                                    */
+    /*                                                                                                                        */
+    /*                            Matrix with character elements                                                              */
+    /*                            (cannot have both integer and numeric)                                                      */
+    /*                                                                                                                        */
+    /*                            %utl_submit_r64x('                                                                          */
+    /*                            mtx<-matrix(nrow=2,ncol=2);                                                                 */
+    /*                            for (i in seq(1,2,1))  {                                                                    */
+    /*                             for (j in seq(1,2,1))  {                                                                   */
+    /*                                  mtx[i,j]=paste0(i+j) ;                                                                */
+    /*                                  }                                                                                     */
+    /*                              };                                                                                        */
+    /*                            colnames(mtx)<-c("x","y");                                                                  */
+    /*                            mtx;                                                                                        */
+    /*                            ');                                                                                         */
+    /*                                 x   y                                                                                  */
+    /*                            [1,]  "2" "3"                                                                               */
+    /*                            [2,]  "3" "4"                                                                               */
+    /*                                                                                                                        */
+    /**************************************************************************************************************************/
 
     /*                   _
     (_)_ __  _ __  _   _| |_
