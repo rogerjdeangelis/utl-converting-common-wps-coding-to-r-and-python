@@ -32,8 +32,7 @@ TASKS ( SOLUTIONS FOR WPS, R AND PYTHON)
        Python issue: could not coerce the pivoted output into a usable panda dataframe,my issue?)
  14. pivot_wide_to_long no sql (no python solution)
        Python issue: could not coerce the pivoted output into a usable panda dataframe,my issue?)
-%let pgm=utl-intergrating-traditional-languages-with-rusing-regex-loops-sql;
-
+ 
 Intergrating-traditional-languages-with-r-using-regex-loops-sql
 
 github
